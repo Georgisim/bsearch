@@ -1,0 +1,12 @@
+alpha,1
+bababa,2
+beco,3
+ceco,-1
+ceco,-2,something,else
+ceco,4,something,else.second,time
+ceco,4.1
+ceco,4.3
+ceco,4.4,345553445
+doner,5
+dude,6
+elf,7

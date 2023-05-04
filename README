@@ -1,0 +1,27 @@
+This project it s tool for fast searching in large CSV file, sorted in 
+alphabetical order by fist column. 
+
+The idea behind this implementation
+is minimizing I/O for very large files, where page loads complexity
+should be ~ O(log n).
+
+If we do reading and tokenization of the whole file, we will need O(n)
+block reads and the only benefit will be just O(log n) for matching the key.
+
+Other advantage of this algorithm is that there is
+no users space memory allocation and no memory copy.
+
+For small files performance probably could be equal or worse, so best universal
+solution is to choose between two algorithm depending on file size. This is
+beyond purpose of this small program, so I'm leaving measuring and tuning
+performance for now.
+There much room for optimization and
+simplifying the code (e.g using binary_search_rightmost)
+
+ Algorithm itself:
+ 1. mmap the file (same idea could be done with file seeks, but much harder)
+ 2. find the middle (binary search) and select the row where middle is within
+    the row - search left and right boundaries of the row
+ 3. repeat binary search until we match key and first column of row
+ 4. if we find it, check for adjacent regions for the same key. Since we
+    have ordered file, they could be only on our left or right sides
